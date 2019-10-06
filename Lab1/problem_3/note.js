@@ -10,7 +10,7 @@ function addListElement (e) {
     div.setAttribute('id', 'textDiv');
     textArea.style.background = e.target.value;
     textArea.setAttribute("id", "card");
-    button.textContent = 'X';
+    button.innerHTML = 'X';
     button.setAttribute("id", "deleteButton");
     button.setAttribute('onclick', 'removeParent(event)')
     div.appendChild(button);
@@ -19,5 +19,6 @@ function addListElement (e) {
 }
 
 function removeParent(e){
+
     e.target.parentElement.remove();
 }

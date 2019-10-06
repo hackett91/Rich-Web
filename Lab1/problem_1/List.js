@@ -2,7 +2,6 @@ var form = document.querySelector('form');
 form.addEventListener('submit', insertEvent);
 
 function insertEvent (event) {
-    console.log(event);
     event.preventDefault();
     addListElement(readFormInput('fullName'));
 }
