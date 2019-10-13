@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Directory</title>
+</head>
+<body id="bodyId">
+<h1> Phone Directory</h1>
+<form id="myForm" onsubmit="readFormData(); event.preventDefault();">
+    <input type="text" name="name">
+    <input type="text" name="phone">
+    <input type="text" name="email">
+    <input type="submit" value="Add Contact">
+</form>
+<div id="search"> Search contact by Mobile No:
+    <form>
+        <input type="text" name="searchNumber">
+    </form>
+</div>
+<table>
+</table>
+
+<script src="phone_dir.js"></script>
+</body>
+</html>
