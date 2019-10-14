@@ -1,21 +1,36 @@
+function sortAsDes(event){
+
+  var tableRows = document.getElementsByClassName('tableRow');
+
+  
+
+  console.log(tableRows);
+}
+
 function readFormData(){
   const formData = document.getElementById("myForm").children;
   validateForm(formData);
 }
 
-function eventDetails(formData) {
+function extractDetails(formData) {
   const formDetails =
               {  UserName: formData.name.value,
                   MobileNumber: formData.phone.value,
                   Email: formData.email.value };
-
   return formDetails;
 }
+
 function validateForm(formData){
-  const formDetails = eventDetails(formData);
+  const formDetails = extractDetails(formData);
   var errorMessages = validateInputs(formDetails);
   if(!errorMessages.length){
-      console.log('Im write');
+      var table = document.getElementById('contactTable').getElementsByTagName('tbody')[0];
+      var tableRow = table.insertRow(table.length);
+      tableRow.setAttribute('class','tableRow');
+      Object.values(formDetails).forEach(function(value) {
+          let cell = tableRow.insertCell();
+          cell.appendChild(document.createTextNode(value));
+      });
   }else{
     const divElement = document.createElement('div');
     divElement.setAttribute('id', 'error');
@@ -24,6 +39,7 @@ function validateForm(formData){
   }
 }
 
+// inspiration taking from https://medium.com/javascript-inside/effective-data-validation-in-javascript-5c2f3e75249e
 const validateDetails = (validation, errorMsg) =>
 data => validation(data) ? data : errorMsg;
 
@@ -51,13 +67,11 @@ const validateEmail = validateDetails(
 const validateInputs = formDetails => {
       var errorMessages = [];
       Object.entries(formDetails).forEach(function([key,value]) {
-          var validateType = eval(`validate${key}`);
-          console.log(validateType)
-          var returnValue = validateType(value);
-
-          if(returnValue !=  value){
-            errorMessages.push(returnValue);
-          }
+        var validateType = eval(`validate${key}`);
+        var returnValue = validateType(value);
+        if(returnValue !=  value){
+          errorMessages.push(returnValue);
+        }
       });
       return errorMessages;
 }

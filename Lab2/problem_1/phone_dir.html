@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Phone Directory</title>
+    <link rel="stylesheet" href="phone_dir.css">
 </head>
 <body id="bodyId">
 <h1> Phone Directory</h1>
@@ -17,7 +18,17 @@
         <input type="text" name="searchNumber">
     </form>
 </div>
-<table>
+<h1>Contacts Summary</h1>
+<table id="contactTable">
+  <thead>
+    <tr>
+      <th onclick="sortAsDes(event)">Name</th>
+      <th>Mobile</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+  </tbody>
 </table>
 
 <script src="phone_dir.js"></script>
