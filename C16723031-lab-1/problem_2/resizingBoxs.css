@@ -1,3 +1,6 @@
+/* note some inspiration taking from
+  https://codepen.io/valerybugakov/pen/JrQgNd
+  */
 .row {
     display: flex;
     flex-wrap: wrap;

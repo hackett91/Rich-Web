@@ -11,17 +11,17 @@ body#notes textarea {
     width: 200px;
     height: 190px;
 }
-#textDiv{
+#divNote{
     display:inline-block;
     position:relative;
 }
-#deleteButton{
+#deleteNote{
     text-align: center;
     position:absolute;
     bottom: 200px;
     right:5px;
 }
-#card{
+#textNote{
     resize: none;
 }
 #red{
