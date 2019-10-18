@@ -1,18 +1,38 @@
-function sortAsDes(event){
+let sortFlag = false;
+var filter = document.getElementById('filter');
+const nameHeader = document.getElementById('name');
 
-  var tableRows = document.getElementsByClassName('tableRow');
-
-  
-
-  console.log(tableRows);
+const filterItems = e => {
+ var text = e.target.value.toLowerCase();
+ var tbody = document.getElementById('tbody');
+ var items = tbody.getElementsByClassName('tableRow');
+ Array.from(items).forEach(function(item){
+   var mobileNumber = item.children[1].textContent;
+   if(mobileNumber.toLowerCase().indexOf(text) != -1){
+     item.style.display = 'table-row';
+   } else {
+     item.style.display = 'none';
+   }
+ });
 }
 
-function readFormData(){
+const sortTable = () => {
+  var tbody = document.getElementById('tbody');
+  var tableRows = Array.from(tbody.getElementsByClassName('tableRow'));
+  sortFlag === false ?
+    tableRows.sort((a ,b) =>  a.firstChild.textContent < b.firstChild.textContent ? -1 : 1).forEach(row => tbody.appendChild(row))
+    :
+    tableRows.sort((a ,b) => a.firstChild.textContent > b.firstChild.textContent ? -1 : 1).forEach(row => tbody.appendChild(row));
+  sortFlag = !sortFlag;
+}
+
+const readFormData = () => {
   const formData = document.getElementById("myForm").children;
+
   validateForm(formData);
 }
 
-function extractDetails(formData) {
+const extractDetails = formData => {
   const formDetails =
               {  UserName: formData.name.value,
                   MobileNumber: formData.phone.value,
@@ -20,8 +40,9 @@ function extractDetails(formData) {
   return formDetails;
 }
 
-function validateForm(formData){
+const validateForm = formData => {
   const formDetails = extractDetails(formData);
+  document.getElementById("myForm").reset();
   var errorMessages = validateInputs(formDetails);
   if(!errorMessages.length){
       var table = document.getElementById('contactTable').getElementsByTagName('tbody')[0];
@@ -67,11 +88,15 @@ const validateEmail = validateDetails(
 const validateInputs = formDetails => {
       var errorMessages = [];
       Object.entries(formDetails).forEach(function([key,value]) {
-        var validateType = eval(`validate${key}`);
-        var returnValue = validateType(value);
+        var validateFunctionType = eval(`validate${key}`);
+        var returnValue = validateFunctionType(value);
         if(returnValue !=  value){
           errorMessages.push(returnValue);
         }
       });
       return errorMessages;
 }
+
+//event listeners
+filter.addEventListener('keyup', filterItems);
+nameHeader.addEventListener('click', sortTable);

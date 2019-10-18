@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="phone_dir.css">
 </head>
 <body id="bodyId">
+<center>
 <h1> Phone Directory</h1>
 <form id="myForm" onsubmit="readFormData(); event.preventDefault();">
     <input type="text" name="name">
@@ -13,24 +14,26 @@
     <input type="text" name="email">
     <input type="submit" value="Add Contact">
 </form>
+
+<br>
 <div id="search"> Search contact by Mobile No:
     <form>
-        <input type="text" name="searchNumber">
+        <input type="text" id="filter">
     </form>
 </div>
-<h1>Contacts Summary</h1>
-<table id="contactTable">
-  <thead>
-    <tr>
-      <th onclick="sortAsDes(event)">Name</th>
-      <th>Mobile</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody id="tbody">
-  </tbody>
-</table>
-
+  <h1>Contacts Summary</h1>
+  <table id="contactTable">
+    <thead>
+      <tr>
+        <th id='name'>Name</th>
+        <th>Mobile</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+  </table>
+</center>
 <script src="phone_dir.js"></script>
 </body>
 </html>
