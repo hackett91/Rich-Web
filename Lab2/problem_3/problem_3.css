@@ -1,0 +1,82 @@
+/* #container{
+  text-align: center;
+}
+
+
+img{
+  height: 200px;
+  width: 200px;
+}
+ul{
+  list-style-type: none;
+  text-align: left;
+}
+li{
+  font-size: 1em;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+
+
+li#listItem{
+    height: 40px;
+    border: 1px solid black;
+} */
+
+/* #profile {
+
+
+}
+*/
+body{
+    font-size: 1em;
+}
+div#container{
+  padding: 20px;
+  margin: 20px;
+}
+form{
+  margin-bottom: 20px;
+}
+input{
+  height: 25px;
+}
+ section#repos {
+  position: absolute;
+  margin-left: 20px;
+}
+img{
+  height: 200px;
+  width: 300px;
+}
+section {
+  height: 400px;
+  width: 300px;
+  display:inline-block;
+
+}
+ul{
+  list-style-type: none;
+  text-align: left;
+  height: 340px;
+  width: 300px;
+  padding-left: 0px;
+  border: 2px solid black;
+}
+#username{
+  width:550px;
+}
+
+#repoList{
+  overflow-y: scroll;
+}
+
+#repoListItem{
+    padding-bottom: 10px;
+    border: 1px solid black;
+}
+.profileInfoList{
+  padding-bottom: 7.5px;
+  border: 1px solid black;
+}
