@@ -6,7 +6,7 @@ const filterItems = e => {
  var text = e.target.value.toLowerCase();
  var tbody = document.getElementById('tbody');
  var items = tbody.getElementsByClassName('tableRow');
- Array.from(items).forEach(function(item){
+ Array.from(items).map((item) => {
    var mobileNumber = item.children[1].textContent;
    if(mobileNumber.toLowerCase().indexOf(text) != -1){
      item.style.display = 'table-row';
@@ -20,15 +20,14 @@ const sortTable = () => {
   var tbody = document.getElementById('tbody');
   var tableRows = Array.from(tbody.getElementsByClassName('tableRow'));
   sortFlag === false ?
-    tableRows.sort((a ,b) =>  a.firstChild.textContent < b.firstChild.textContent ? -1 : 1).forEach(row => tbody.appendChild(row))
+    tableRows.sort((a ,b) =>  a.firstChild.textContent < b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row))
     :
-    tableRows.sort((a ,b) => a.firstChild.textContent > b.firstChild.textContent ? -1 : 1).forEach(row => tbody.appendChild(row));
+    tableRows.sort((a ,b) => a.firstChild.textContent > b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row));
   sortFlag = !sortFlag;
 }
 
 const readFormData = () => {
   const formData = document.getElementById("myForm").children;
-
   validateForm(formData);
 }
 
@@ -43,12 +42,15 @@ const extractDetails = formData => {
 const validateForm = formData => {
   const formDetails = extractDetails(formData);
   document.getElementById("myForm").reset();
+  if(document.getElementById('error')){
+    document.getElementById('error').innerHTML = '';
+  }
   var errorMessages = validateInputs(formDetails);
   if(!errorMessages.length){
       var table = document.getElementById('contactTable').getElementsByTagName('tbody')[0];
       var tableRow = table.insertRow(table.length);
       tableRow.setAttribute('class','tableRow');
-      Object.values(formDetails).forEach(function(value) {
+      Object.values(formDetails).map((value) => {
           let cell = tableRow.insertCell();
           cell.appendChild(document.createTextNode(value));
       });
@@ -82,12 +84,12 @@ const validateUserName = validateDetails(
 const validateEmail = validateDetails(
                                     // sourced from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   data => data && data.length < 40 && data.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-  "Should have a proper validation and should be less than 40 characters in length"
+  "Email contains @, .ie .com etc and should be less than 40 characters in length"
 );
 
 const validateInputs = formDetails => {
       var errorMessages = [];
-      Object.entries(formDetails).forEach(function([key,value]) {
+      Object.entries(formDetails).map(([key,value]) => {
         var validateFunctionType = eval(`validate${key}`);
         var returnValue = validateFunctionType(value);
         if(returnValue !=  value){
