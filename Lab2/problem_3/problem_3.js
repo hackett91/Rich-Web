@@ -11,11 +11,18 @@ const getGitHubUserEvent = (event) => {
   }else{
     fetch(url.concat(username))
     .then(response => response.json())
-    .then((userInfo) =>   profileInfo.innerHTML = getUserInfo(userInfo));
+    .then((userInfo) =>   profileInfo.innerHTML = getUserInfo(userInfo))
+    .catch((err) => {
+      console.log(err + "fetch failed for Github User");
+      alert("Invalid username or check internet connection")
+    });
 
     fetch(url.concat(username).concat('/repos'))
     .then(response => response.json())
-    .then((userRepos) => repoList.innerHTML = getUserRepos(userRepos));
+    .then((userRepos) => repoList.innerHTML = getUserRepos(userRepos))
+    .catch((err) => {
+      console.log(err + "fetch failed for Github Repos");
+    });
   }
 }
 

@@ -20,3 +20,9 @@ tr.tableRow:nth-child(odd) {
   width: 800px;
   background-color: #009999;
 }
+
+div#error{
+  margin-top: 20px;
+  color: red;
+  width: 200px;
+}

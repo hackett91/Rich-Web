@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CountDown</title>
+    <link rel="stylesheet" href="countdown.css">
+</head>
+<body>
+  <div id="row">
+    <div class="col">
+      <form id='formLeft'>
+        <input class='inputs' type="text" id="hour" placeholder="h">:
+        <input class='inputs'type="text" id="minute" placeholder="m">:
+        <input class='seconds'  type="text" id="seconds" placeholder="0"><br>
+        <input type="submit" value="START COUNTDOWN" class="submit">
+      </form><br>
+      <h1 id='h1'></h1>
+    </div>
+  </div>
+<script src="https://npmcdn.com/@reactivex/rxjs@5.0.0-beta.3/dist/global/Rx.umd.js"></script>
+<script src="countdown.js"  ></script>
+</body>
+</html>

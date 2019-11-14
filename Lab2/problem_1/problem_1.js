@@ -1,5 +1,4 @@
-let sortFlag = false;
-var filter = document.getElementById('filter');
+const filter = document.getElementById('filter');
 const nameHeader = document.getElementById('name');
 
 const filterItems = e => {
@@ -16,15 +15,23 @@ const filterItems = e => {
  });
 }
 
-const sortTable = () => {
-  var tbody = document.getElementById('tbody');
-  var tableRows = Array.from(tbody.getElementsByClassName('tableRow'));
-  sortFlag === false ?
-    tableRows.sort((a ,b) =>  a.firstChild.textContent < b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row))
-    :
-    tableRows.sort((a ,b) => a.firstChild.textContent > b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row));
-  sortFlag = !sortFlag;
-}
+const sortTable = (function() {
+  var trig = true;
+
+  return function sortTable() {
+    var tbody = document.getElementById('tbody');
+    var tableRows = Array.from(tbody.getElementsByClassName('tableRow'));
+    if(trig){
+      tableRows.sort((a ,b) =>  a.firstChild.textContent < b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row));
+      trig = false;
+    }
+    else{
+      tableRows.sort((a ,b) =>  a.firstChild.textContent > b.firstChild.textContent ? -1 : 1).map(row => tbody.appendChild(row));
+      trig = true;
+    }
+  }
+  })();
+
 
 const readFormData = () => {
   const formData = document.getElementById("myForm").children;
@@ -43,7 +50,7 @@ const validateForm = formData => {
   const formDetails = extractDetails(formData);
   document.getElementById("myForm").reset();
   if(document.getElementById('error')){
-    document.getElementById('error').innerHTML = '';
+    document.getElementById('error').remove();
   }
   var errorMessages = validateInputs(formDetails);
   if(!errorMessages.length){
@@ -58,7 +65,7 @@ const validateForm = formData => {
     const divElement = document.createElement('div');
     divElement.setAttribute('id', 'error');
     divElement.innerHTML = errorMessages;
-    document.getElementById("bodyId").appendChild(divElement);
+    document.getElementById("center").appendChild(divElement);
   }
 }
 
@@ -69,22 +76,21 @@ data => validation(data) ? data : errorMsg;
 // validate the username
 const validateMobileNumber = validateDetails(
   data => data && data.length == 10 && data.match(/^\d*$/),
-  "Should contain only Numbers" +
-  " Should be equal to 10 characters in length."
+  "<strong>Mobile:</strong> should contain only numbers" +
+  "and be equal to 10 characters<br>"
 );
 
 // validate the username
 const validateUserName = validateDetails(
   data => data && data.length < 20 && data.match(/^[a-z\s]*$/),
-  "Should contain only Alphabets and Space." +
-  " Should be less than or equal to 20 characters in length."
+  "<strong>Username:</strong> should contain only alphabets, spaces, and less then 21 characters<br>"
 );
 
 // validate the username
 const validateEmail = validateDetails(
                                     // sourced from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   data => data && data.length < 40 && data.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-  "Email contains @, .ie .com etc and should be less than 40 characters in length"
+  "<strong>Email:</strong> should be valid and under 40 characters"
 );
 
 const validateInputs = formDetails => {
